@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Quiz Score</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Quiz Score</title>
+</head>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<body>
+<center>
+    <h1>Add Quiz Score</h1>
+    <form name="addresults" action="/results/add" method="post">
+        <select name="student_id">
+            {% for student in students %}
+            <option value="{{ student.student_id }} " name="student">Student ID# :{{ student.student_id }} - {{student.student_name}}</option>
+            {% endfor %}
+        </select>
+        <select name="quiz_id">
+            {% for quiz in quizzes %}
+            <option value="{{ quiz.quiz_id }}">Quiz ID#: {{ quiz.quiz_id }} - {{quiz.subject}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <b>Score:</b><input type="number" name="score">
+        <input type="submit" value="Submit">
+    </form>
+</center>
+</body>
+</html>
